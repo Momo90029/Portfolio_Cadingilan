@@ -1,0 +1,53 @@
+/* Base resets */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Layout structure === */
+.app-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background-color: #efefef;
+}
+
+/* Every page fills the space between navbar & footer */
+.page-content {
+  flex: 1; /* pushes footer down */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* centers vertical if content is small */
+  padding-top: 100px; /* offset navbar */
+  padding-bottom: 100px; /* offset footer */
+  position: relative;
+  z-index: 2;
+}
+
+/* Navbar always above floating background */
+nav, .navbar {
+  position: relative;
+  z-index: 10;
+}
+
+/* Footer fixed at bottom visually but stays in flow */
+footer {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  padding: 20px 8%;
+  background: #000;
+  color: #fff;
+  text-align: center;
+}
+
+/* Floating background sits behind everything */
+.floating-dots {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
