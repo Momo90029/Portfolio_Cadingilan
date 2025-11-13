@@ -1,7 +1,7 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
 import "./About.css";
-import profileImg from "/Users/omarc/Desktop/Projects 2025/Portfolio/Cadingilan_Portfolio/Cadingilan_myportfolio/src/assets/Images/profile-image.png"; // ✅ correct relative import
+import profileImg from "/src/assets/Images/profile-image.png"; // ✅ correct relative import
 
 const About = () => {
   return (
@@ -66,6 +66,8 @@ const About = () => {
                 "Design with purpose. Build with passion." 
               </p>
               <p>-Omar Cadingilan</p>
+
+              
 
         </div>
       </div>
