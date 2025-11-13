@@ -1,6 +1,7 @@
 import React from 'react';
 import backgroundsvg from '../../assets/Background/yellowbg.svg';
 import './Home.css';
+import profileImg from "../../assets/Images/profile-image.png";
 import Typewriter from 'typewriter-effect';
 import { Link } from "react-router-dom";
 
@@ -40,8 +41,9 @@ const Home = () => {
   <div className="yellow-bg"></div>
   <img
     className="profile-image"
-    src="/src/assets/Images/profile-image.png"
-    alt="Profile"
+    src={profileImg}
+    alt="Omar Cadingilan"
+    loading="lazy"
   />
 </div>
 
