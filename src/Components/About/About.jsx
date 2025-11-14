@@ -1,7 +1,7 @@
 import React from "react";
 import Typewriter from "typewriter-effect";
 import "./About.css";
-import profileImg from "/src/assets/Images/profile-image.png"; // ✅ correct relative import
+import profileImg from "/src/assets/Images/Profile-Images/profile-image.png"; // ✅ correct relative import
 
 const About = () => {
   return (

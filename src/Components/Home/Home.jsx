@@ -1,7 +1,7 @@
 import React from 'react';
 import backgroundsvg from '../../assets/Background/yellowbg.svg';
 import './Home.css';
-import profileImg from "../../assets/Images/profile-image.png";
+import profileImg from "../../assets/Images/Profile-Images/profile-image.png";
 import Typewriter from 'typewriter-effect';
 import { Link } from "react-router-dom";
 
