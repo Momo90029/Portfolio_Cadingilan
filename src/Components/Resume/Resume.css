@@ -128,8 +128,8 @@ body { background: var(--page-bg); color: #222; font-family: Inter, system-ui, -
 .timeline-item { position:relative; display:flex; gap:16px; padding: 16px 14px; margin-left: 36px; }
 .timeline-dot {
   position:absolute;
-  left: 6px;
-  top: 22px;
+  left: -28px;
+  top: 28px;
   width: 24px;
   height: 24px;
   border-radius:50%;
