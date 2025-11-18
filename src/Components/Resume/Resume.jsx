@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import profileImg from "../../assets/Images/Profile-Images/profile-image.png";
 import './Resume.css';
 import certificates from "../../assets/Data/Certificates/Certificate";
 import skills from "../../assets/Data/Skills/Skills";
@@ -33,7 +34,7 @@ export default function Resume() {
       <section className="top-row">
         <div className="photo-card">
           <div className="photo-frame">
-            <img src="https://picsum.photos/seed/resume-profile/200" alt="Omar Cadingilan" />
+            <img src={profileImg} alt="Omar Cadingilan" />
           </div>
           <div className="photo-caption">
             <strong>Omar bin Ayob D. Cadingilan</strong>
