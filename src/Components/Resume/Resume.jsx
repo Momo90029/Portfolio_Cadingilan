@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import profileImg from "../../assets/Images/Profile-Images/profile-image.png";
 import './Resume.css';
+import Resume from "../../assets/Downloads/Resume_Cadingilan/Resume_cadingilan.pdf";
 import certificates from "../../assets/Data/Certificates/Certificate";
 import skills from "../../assets/Data/Skills/Skills";
 import experience from '../../assets/Data/Experiences/Experience';
@@ -25,7 +26,7 @@ export default function Resume() {
           </p>
         </div>
 
-        <a className="btn-download" href="#" download>
+        <a className="btn-download" href={Resume} download>
           ⬇️ Download Resume
         </a>
       </header>
