@@ -102,14 +102,6 @@ export default function Resume() {
   </div>
 </section>
 
-{/* View More / View Less Button */}
-<div className="view-more-wrapper">
-  <button className="view-more-btn" onClick={() => setExpanded(!expanded)}>
-    {expanded ? "View Less ▲" : "View More ▼"}
-  </button>
-</div>
-
-
       {/* Experience */}
       <section className="timeline-section card">
         <h3>Experience</h3>

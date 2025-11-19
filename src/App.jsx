@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // ✅ Background animation
-import FloatingDots from "./assets/Background/Floating/FloatingDots.jsx"; 
+import BackgroundCanvas from "../../Cadingilan_myportfolio/src/assets/Background/Floating/BackgroundCanvas.jsx";
 
 // ✅ Components
 import Home from './Components/Home/Home.jsx';
@@ -83,7 +83,7 @@ function App() {
     <Router>
       <div className="App" style={{ position: "relative", zIndex: 1 }}>
         <Navbar />
-      <FloatingDots dotCount={40} />
+       <BackgroundCanvas />
         <AnimatedRoutes />
         <Footer />
       </div>
