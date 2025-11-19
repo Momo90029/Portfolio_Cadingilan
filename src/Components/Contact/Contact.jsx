@@ -1,14 +1,220 @@
-import React from 'react'
+import React, { useState } from "react";
+import {
+  Send,
+  Sparkles,
+  Loader2,
+  CheckCircle,
+  AlertCircle,
+  Mail,
+  MapPin,
+  Phone,
+} from "lucide-react";
+import "./Contact.css";
 
-const Contact = () => {
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const [status, setStatus] = useState("idle");
+  const [polishStatus, setPolishStatus] = useState("idle");
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handlePolish = async () => {
+    if (!formData.message || formData.message.length < 5) return;
+
+    setPolishStatus("loading");
+
+    // simulate AI polish
+    setTimeout(() => {
+      setFormData((prev) => ({
+        ...prev,
+        message: prev.message + " (polished)",
+      }));
+
+      setPolishStatus("success");
+      setTimeout(() => setPolishStatus("idle"), 2500);
+    }, 1200);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus("submitting");
+
+    setTimeout(() => {
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+
+      setTimeout(() => setStatus("idle"), 4000);
+    }, 1500);
+  };
+
   return (
-    <div>
-        <section className="Contact">
-      <h1>Contact Page</h1>
-      <p>This is the Contact section.</p>
-    </section>
-    </div>
-  )
-}
 
-export default Contact
+   <div className="contact-page-center">
+       <div className="contact-wrapper">
+      {/* LEFT SIDE */}
+      <div className="contact-left">
+        <div className="circle top"></div>
+        <div className="circle bottom"></div>
+
+        <h3 className="left-title">Contact Information</h3>
+        <p className="left-text">
+          I'm currently open to freelance projects and full-time opportunities.
+          Feel free to reach out if you have a question or just want to say hi!
+        </p>
+
+        <div className="info-list">
+          <div className="info-item">
+            <div className="icon-box">
+              <Mail className="icon" />
+            </div>
+            <div>
+              <p className="label">Email</p>
+              <p className="value">omarcadingilan@gmail.com</p>
+            </div>
+          </div>
+
+          <div className="info-item">
+            <div className="icon-box">
+              <Phone className="icon" />
+            </div>
+            <div>
+              <p className="label">Phone Number</p>
+              <p className="value">(+63)9776605126</p>
+            </div>
+          </div>
+
+          <div className="info-item">
+            <div className="icon-box">
+              <MapPin className="icon" />
+            </div>
+            <div>
+              <p className="label">Location</p>
+              <p className="value">Purok III, Tapodoc, Labangan, Zamboanga del Sur</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* RIGHT SIDE */}
+      <div className="contact-right">
+        <h2 className="form-title">Send a Message</h2>
+
+        <form onSubmit={handleSubmit} className="form">
+          <div className="row">
+            <div className="field">
+              <label>Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                value={formData.name}
+                onChange={handleChange}
+                placeholder="John Doe"
+              />
+            </div>
+
+            <div className="field">
+              <label>Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="john@example.com"
+              />
+            </div>
+          </div>
+
+          <div className="field">
+            <label>Subject</label>
+            <input
+              type="text"
+              name="subject"
+              required
+              value={formData.subject}
+              onChange={handleChange}
+              placeholder="Project Inquiry"
+            />
+          </div>
+
+          <div className="field">
+            <div className="message-header">
+              <label>Message</label>
+
+              <button
+                type="button"
+                className={`polish-btn ${polishStatus}`}
+                disabled={polishStatus === "loading"}
+                onClick={handlePolish}
+              >
+                {polishStatus === "loading" ? (
+                  <Loader2 className="spin" size={14} />
+                ) : polishStatus === "success" ? (
+                  <CheckCircle size={14} />
+                ) : (
+                  <Sparkles size={14} />
+                )}
+                <span>
+                  {polishStatus === "loading"
+                    ? "Polishing..."
+                    : polishStatus === "success"
+                    ? "Polished!"
+                    : "AI Polish"}
+                </span>
+              </button>
+            </div>
+
+            <textarea
+              name="message"
+              rows="5"
+              required
+              value={formData.message}
+              onChange={handleChange}
+              placeholder="Write your message here..."
+            ></textarea>
+
+            {polishStatus === "error" && (
+              <p className="error-text">
+                <AlertCircle size={12} /> Failed to polish. Try again.
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className={`submit-btn ${status}`}
+            disabled={status === "submitting" || status === "success"}
+          >
+            {status === "submitting" ? (
+              <>
+                <Loader2 className="spin" size={18} /> Sending...
+              </>
+            ) : status === "success" ? (
+              <>
+                <CheckCircle size={20} /> Message Sent!
+              </>
+            ) : (
+              <>
+                <Send size={16} /> Send Message
+              </>
+            )}
+          </button>
+        </form>
+      </div>
+    </div>
+</div>
+
+  );
+};
+
+export default ContactForm;

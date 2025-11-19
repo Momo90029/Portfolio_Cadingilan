@@ -1,0 +1,240 @@
+/* PAGE CENTER WRAPPER — NEW */
+.contact-page-center {
+  display: flex;
+  justify-content: center;
+  padding: 100px 20px;
+  width: 100%;
+  background: transparent;
+}
+
+/* WRAPPER */
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #f2c200;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+  max-width: 1100px;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .contact-wrapper {
+    flex-direction: row;
+  }
+}
+
+/* LEFT PANEL (YELLOW THEME) */
+.contact-left {
+  background: #ffd000; /* Yellow */
+  color: #0f172a; /* Dark text */
+  padding: 2rem;
+  position: relative;
+  flex: 0 0 40%;
+}
+
+.left-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #0f172a;
+}
+
+.left-text {
+  color: #1f2937;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Circle effects */
+.circle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.35);
+  opacity: 1;
+}
+
+.circle.top {
+  width: 220px;
+  height: 220px;
+  top: -70px;
+  right: -70px;
+}
+
+.circle.bottom {
+  width: 160px;
+  height: 160px;
+  bottom: -60px;
+  left: -60px;
+}
+
+/* CONTACT INFO ITEMS */
+.info-list {
+  margin-top: 1rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+}
+
+.icon-box {
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.icon {
+  width: 22px;
+  height: 22px;
+  color: #0f172a;
+}
+
+.label {
+  font-size: 13px;
+  color: #374151;
+}
+
+.value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #111827;
+}
+
+/* RIGHT PANEL */
+.contact-right {
+  background: white;
+  padding: 2rem;
+  flex: 1;
+}
+
+.form-title {
+  font-size: 26px;
+  font-weight: bold;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+
+/* FORM */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.row {
+  display: grid;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 10px 14px;
+  margin-top: 5px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  background: #fdfdfd;
+  transition: 0.2s;
+  outline: none;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: #ffd000;
+  background: white;
+  box-shadow: 0 0 0 2px rgba(255, 208, 0, 0.35);
+}
+
+/* AI POLISH BUTTON */
+.polish-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 5px;
+  transition: 0.2s;
+}
+
+.polish-btn:hover {
+  background: #fff3b0;
+}
+
+.polish-btn.loading {
+  color: #d4a100;
+}
+
+.polish-btn.success {
+  background: #e6ffbf;
+  color: #15803d;
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  background: #ffd000;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #f2c200;
+}
+
+.submit-btn.submitting {
+  background: #e1b300;
+}
+
+.submit-btn.success {
+  background: #16a34a;
+  color: white;
+}
+
+.spin {
+  animation: spinning 0.7s linear infinite;
+}
+
+@keyframes spinning {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Error Text */
+.error-text {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #dc2626;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}

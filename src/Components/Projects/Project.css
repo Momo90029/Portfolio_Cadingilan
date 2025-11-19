@@ -1,67 +1,365 @@
-.container-card {
-  align-items: center;
-  width: 99vw;
-  height: 130vh;
-  min-height: 100%; /* allows natural growth */
-  min-width: 100%;
-  margin: 0 auto; /* center container horizontally */
+/* ------------------------------------------------------------
+   GLOBAL LAYOUT / PAGE WRAPPER
+------------------------------------------------------------ */
+.app-container {
+  min-height: 100vh;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+}
+
+.content-wrapper {
+  width: min(1200px, 95%);
+  margin: 0 auto;
+  padding: 40px 0 80px 0;
+}
+
+
+/* ------------------------------------------------------------
+   HEADER STYLING
+------------------------------------------------------------ */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.site-title {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #1a1a1a;
+}
+
+.title-underline {
+  width: 80px;
+  height: 4px;
+  background: #4f46e5;
+  border-radius: 10px;
+  margin: 8px auto 18px auto;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+.hidden-break {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .hidden-break {
+    display: block;
+  }
+}
+
+
+/* ------------------------------------------------------------
+   PROJECTS GRID
+------------------------------------------------------------ */
+.projects-grid {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-item {
+  display: flex;
+  justify-content: center;
+}
+
+
+/* ------------------------------------------------------------
+   PROJECT CARD STYLING
+------------------------------------------------------------ */
+.project-card {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE AREA */
+.image-area {
+  position: relative;
+  width: 100%;
+  height: 200px;
   overflow: hidden;
 }
 
-/* Centers and styles the text section */
-.text-center {
-  text-align: center;
-}
-
-/* Add subtle spacing and hover animation to the cards */
-.card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Optional: Adjust card image corners and fit */
-.card-img-top {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  object-fit: cover;
+.card-image {
   width: 100%;
-  height: 220px; /* adjust this value to what fits your design */
-  object-position: center;
-  border-radius: 0.5rem;
-}
-.modal-content {
-  background-color: #f0f0f0; /* light gray tone */
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.5s ease;
 }
 
-/* Optional: darken the area behind the modal */
-.modal-backdrop.show {
-  background-color: rgba(0, 0, 0, 0.6);
+.card-image-hover {
+  transform: scale(1.05);
+}
+
+/* HOVER OVERLAY */
+.hover-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.25s ease;
+}
+
+.hover-overlay-visible {
+  opacity: 1;
+}
+
+.hover-icon {
+  color: #fff;
+}
+
+/* CAROUSEL DOTS */
+.carousel-dots {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+}
+
+.carousel-dot {
+  width: 9px;
+  height: 9px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  transition: background 0.25s;
+}
+
+.carousel-dot.active {
+  background: white;
+}
+
+/* CARD TEXT CONTENT */
+.card-content {
+  padding: 18px;
+  color: #333;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  transition: color 0.25s;
+}
+
+.card-title-hover {
+  color: #4f46e5;
+}
+
+.card-description {
+  font-size: 0.9rem;
+  color: #555;
+  height: 70px;
+  overflow: hidden;
+}
+
+.card-footer {
+  margin-top: 12px;
+}
+
+.view-details {
+  font-size: 0.9rem;
+  color: #4f46e5;
+  font-weight: 600;
 }
 
 
-.modal .carousel-item img {
-  height: 400px;         /* You can make modal images taller */
-  object-fit: contain;   /* This one fits the full image without cropping */
-  object-position: center;
-  background-color: #939393; /* optional neutral bg behind transparent images */
+/* ------------------------------------------------------------
+   MODAL ROOT + BACKDROP
+------------------------------------------------------------ */
+.modal-root {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 60px;
+}
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
 }
 
 
-/* Optional: Limit overall max width of the grid for better centering */
-.row {
-  max-width: 1200px;
-  margin: 0 auto;
+/* ------------------------------------------------------------
+   MODAL CARD
+------------------------------------------------------------ */
+.modal-card {
+  width: min(850px, 95%);
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  z-index: 1000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalFade 0.3s ease;
 }
 
-.text-justify {
-  text-align: justify;
+@keyframes modalFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 20px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.modal-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+/* Close Button */
+.icon-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  opacity: 0.6;
+}
+
+/* Body */
+.modal-body {
+  padding: 20px;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* Carousel container */
+.modal-carousel {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  margin-bottom: 25px;
+  overflow: hidden;
+}
+
+.modal-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Carousel navigation arrows */
+.nav-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(0, 0, 0, 0.45);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.nav-button:hover {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.nav-button.left {
+  left: 15px;
+}
+
+.nav-button.right {
+  right: 15px;
+}
+
+/* Pagination dots */
+.modal-pagination {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.modal-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #bbb;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+
+.modal-dot.active {
+  background: #4f46e5;
+}
+
+/* Description section */
+.modal-description {
+  padding: 10px 5px;
+}
+
+.about-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.about-text {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Footer */
+.modal-footer {
+  padding: 16px 20px;
+  border-top: 1px solid #e5e5e5;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-secondary {
+  background: #eee;
+  border: 1px solid #ccc;
+}
+
+.btn-secondary:hover {
+  background: #ddd;
 }
