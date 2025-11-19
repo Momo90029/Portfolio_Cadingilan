@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import "./BackgroundCanvas.css";
+
 
 const CONFIG = {
   particleCount: 80,
