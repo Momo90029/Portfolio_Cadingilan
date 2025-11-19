@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // ✅ Background animation
-import BackgroundCanvas from "../../Cadingilan_myportfolio/src/assets/Background/Floating/BackgroundCanvas.jsx";
+import BackgroundCanvas from "./assets/Background/BackgroundCanvas.jsx";
 
 // ✅ Components
 import Home from './Components/Home/Home.jsx';
