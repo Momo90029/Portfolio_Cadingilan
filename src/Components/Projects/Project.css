@@ -1,4 +1,20 @@
 /* ------------------------------------------------------------
+   THEME VARIABLES
+------------------------------------------------------------ */
+:root {
+  --primary: #FFD900;         /* Main Yellow */
+  --primary-dark: #F8C600;    /* Slightly Deeper Yellow */
+  --text-dark: #1A1A1A;
+  --text-light: #555;
+  --background: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --shadow-light: rgba(0, 0, 0, 0.08);
+  --shadow-medium: rgba(0, 0, 0, 0.12);
+  --shadow-strong: rgba(0, 0, 0, 0.20);
+  --overlay-dark: rgba(0, 0, 0, 0.35);
+}
+
+/* ------------------------------------------------------------
    GLOBAL LAYOUT / PAGE WRAPPER
 ------------------------------------------------------------ */
 .app-container {
@@ -12,9 +28,8 @@
 .content-wrapper {
   width: min(1200px, 95%);
   margin: 0 auto;
-  padding: 40px 0 80px 0;
+  padding: 40px 0 80px;
 }
-
 
 /* ------------------------------------------------------------
    HEADER STYLING
@@ -27,20 +42,20 @@
 .site-title {
   font-size: 2.4rem;
   font-weight: 800;
-  color: #1a1a1a;
+  color: var(--text-dark);
 }
 
 .title-underline {
   width: 80px;
   height: 4px;
-  background: #4f46e5;
+  background: var(--primary);
   border-radius: 10px;
-  margin: 8px auto 18px auto;
+  margin: 8px auto 18px;
 }
 
 .subtitle {
   font-size: 1rem;
-  color: #444;
+  color: var(--text-light);
   line-height: 1.5;
 }
 
@@ -53,7 +68,6 @@
     display: block;
   }
 }
-
 
 /* ------------------------------------------------------------
    PROJECTS GRID
@@ -69,16 +83,15 @@
   justify-content: center;
 }
 
-
 /* ------------------------------------------------------------
-   PROJECT CARD STYLING
+   PROJECT CARD
 ------------------------------------------------------------ */
 .project-card {
   width: 100%;
-  background: #ffffff;
+  background: var(--card-bg);
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 5px 18px var(--shadow-light);
   cursor: pointer;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
   position: relative;
@@ -86,7 +99,7 @@
 
 .project-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 8px 26px var(--shadow-medium);
 }
 
 /* IMAGE AREA */
@@ -112,7 +125,7 @@
 .hover-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.35);
+  background: var(--overlay-dark);
   opacity: 0;
   display: flex;
   justify-content: center;
@@ -147,13 +160,13 @@
 }
 
 .carousel-dot.active {
-  background: white;
+  background: var(--primary);
 }
 
 /* CARD TEXT CONTENT */
 .card-content {
   padding: 18px;
-  color: #333;
+  color: var(--text-dark);
 }
 
 .card-title {
@@ -164,12 +177,12 @@
 }
 
 .card-title-hover {
-  color: #4f46e5;
+  color: var(--primary-dark);
 }
 
 .card-description {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--text-light);
   height: 70px;
   overflow: hidden;
 }
@@ -180,10 +193,9 @@
 
 .view-details {
   font-size: 0.9rem;
-  color: #4f46e5;
   font-weight: 600;
+  color: var(--primary-dark);
 }
-
 
 /* ------------------------------------------------------------
    MODAL ROOT + BACKDROP
@@ -204,7 +216,6 @@
   background: rgba(0, 0, 0, 0.45);
 }
 
-
 /* ------------------------------------------------------------
    MODAL CARD
 ------------------------------------------------------------ */
@@ -214,7 +225,7 @@
   border-radius: 14px;
   overflow: hidden;
   z-index: 1000;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px var(--shadow-strong);
   animation: modalFade 0.3s ease;
 }
 
@@ -229,7 +240,6 @@
   }
 }
 
-/* Header */
 .modal-header {
   display: flex;
   justify-content: space-between;
@@ -241,9 +251,9 @@
 .modal-title {
   font-size: 1.35rem;
   font-weight: 700;
+  color: var(--text-dark);
 }
 
-/* Close Button */
 .icon-button {
   border: none;
   background: none;
@@ -254,14 +264,13 @@
   opacity: 0.6;
 }
 
-/* Body */
 .modal-body {
   padding: 20px;
   max-height: 70vh;
   overflow-y: auto;
 }
 
-/* Carousel container */
+/* CAROUSEL */
 .modal-carousel {
   position: relative;
   width: 100%;
@@ -276,7 +285,6 @@
   object-fit: cover;
 }
 
-/* Carousel navigation arrows */
 .nav-button {
   position: absolute;
   top: 50%;
@@ -302,7 +310,7 @@
   right: 15px;
 }
 
-/* Pagination dots */
+/* Pagination Dots */
 .modal-pagination {
   display: flex;
   justify-content: center;
@@ -321,10 +329,10 @@
 }
 
 .modal-dot.active {
-  background: #4f46e5;
+  background: var(--primary);
 }
 
-/* Description section */
+/* Description */
 .modal-description {
   padding: 10px 5px;
 }
@@ -333,11 +341,12 @@
   font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 8px;
+  color: var(--text-dark);
 }
 
 .about-text {
   font-size: 0.95rem;
-  color: #444;
+  color: var(--text-light);
   line-height: 1.5;
 }
 
@@ -361,5 +370,6 @@
 }
 
 .btn-secondary:hover {
-  background: #ddd;
+  background: var(--primary);
+  color: var(--text-dark);
 }

@@ -210,7 +210,7 @@ const ElogbookImages = Object.values(ElogbookImageImport).map((img) => img.defau
   const projects = [
     {
       id: '1',
-      title: 'E-Konsulta...',
+      title: 'E-Konsulta: Clinic Medical Record Management System with Online Follow-Up Through Google Meet',
       description: <p>E-Konsulta is a system we developed during our capstone project, 
       it is a system that boosted the work efficiency of our clinic, it highlights live tracking of data of the patients 
       and inventory of the clinic. it also has the feature of integrating online checkup using gmeet for scheduling patients 
@@ -219,14 +219,19 @@ const ElogbookImages = Object.values(ElogbookImageImport).map((img) => img.defau
     },
     {
       id: '2',
-      title: 'PawFriends',
-      description: '...',
+      title: 'PawFriends: Pet Health and Mood Tracking App',
+      description: <p>PawFriends app will let the user’s  be able to track down the health and food of your pet 
+        and recommending food suitable to your pet by letting the user know and track the pets status. We will 
+        measure effectiveness by getting the feedback of the user satisfaction and getting result of the pets condition.</p>,
       images: PawFriendsImages
     },
     {
       id: '3',
-      title: 'OWWA...',
-      description: '...',
+      title: 'OWWA Digital E-Logbook System',
+      description: <p>The OWWA Digital E-Logbook System is a streamlined, data-driven platform designed to modernize
+         client monitoring and service recording for Overseas Workers Welfare Administration (OWWA) offices. This tool 
+         enhances efficiency by automating client check-ins and organizing essential client information using smart categorization 
+         features.</p>,
       images: ElogbookImages
     },
   ]; 
