@@ -1,7 +1,9 @@
 <h2 align="left">Hi 👋! </br>
   My name is Omar bin Ayob D. Cadingilan </br>
   I'm a Pennoyysss, from Philippines</h2>
-<p>This Project is Special to comemorate our 10th Monthsarry of my Girl so yeah not romantic but cool</p>
+
+  <h3>Description:</h3>
+        <p>Hello Guys this is my personal Web Portfolio and for the first time i have able to develop something that i can say a decent project which highlights my skills and who i am hope you all like it ❤️❤️❤️</p>
 
 ###
 
@@ -46,7 +48,6 @@
 
 <br clear="both">
 
-<p>HAPPY MONTHSARRY LANG💘💘💘</p>
-
+  <p> © 2025. Omar bin Ayob D. Cadingilan. All rights reserved. </p>
 
 ###
