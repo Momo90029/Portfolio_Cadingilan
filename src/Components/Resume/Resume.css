@@ -63,18 +63,21 @@ body { background: var(--page-bg); color: #222; font-family: Inter, system-ui, -
   height: 170px;
   border-radius: 28px;
   padding: 8px;
-  background: linear-gradient(135deg, rgba(241,196,15,0.12), rgba(0,0,0,0.02));
-  box-shadow: var(--shadow);
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  background: #f1c40f; /* Solid yellow */
+  box-shadow: 
+    0 0 20px rgba(241, 196, 15, 0.6),   /* Outer soft yellow glow */
+    0 0 40px rgba(241, 196, 15, 0.3),   /* Larger diffused glow */
+    var(--shadow);                      /* Your existing global shadow */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
 .photo-frame img {
   width: 150px;
   height: 150px;
   border-radius: 18px;
   object-fit: cover;
-  border: 6px solid white;
   box-shadow: 0 8px 28px rgba(0,0,0,0.08);
 }
 .photo-caption { text-align:center; color: var(--muted); }
@@ -167,6 +170,41 @@ body { background: var(--page-bg); color: #222; font-family: Inter, system-ui, -
 .edu-card,
 .certs-cta {
   flex: 1;
+}
+
+/* Wrapper to position preview */
+.download-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* Hidden by default */
+.resume-preview {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  width: 240px;
+  padding: 8px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 100;
+}
+
+/* Show on hover */
+.download-wrapper:hover .resume-preview {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.resume-preview img {
+  width: 100%;
+  border-radius: 8px;
 }
 
 /* Buttons */

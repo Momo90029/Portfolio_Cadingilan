@@ -6,6 +6,8 @@ import certificates from "../../assets/Data/Certificates/Certificate";
 import skills from "../../assets/Data/Skills/Skills";
 import experience from '../../assets/Data/Experiences/Experience';
 import education from '../../assets/Data/Education/Education';
+import resumePreview from "../../assets/Downloads/Resume_Cadingilan/Resume_cadingilan.png";
+
 
 
 // --- APP ---
@@ -13,6 +15,8 @@ import education from '../../assets/Data/Education/Education';
 export default function Resume() {
 
  const [expanded, setExpanded] = useState(false);
+
+ const CertificateDownload = "/src/assets/Downloads/Certificates/Certificates_Cadingilan.zip";
 
 
   return (
@@ -26,9 +30,16 @@ export default function Resume() {
           </p>
         </div>
 
-        <a className="btn-download" href={ResumeDownload} download>
-          ⬇️ Download Resume
-        </a>
+      <div className="download-wrapper">
+         <a className="btn-download" href={ResumeDownload} download>
+            ⬇️ Download Resume
+         </a>
+
+      <div className="resume-preview">
+         <img src={resumePreview} alt="Resume Preview" />
+      </div>
+</div>
+
       </header>
 
       {/* Top Section */}
@@ -146,14 +157,14 @@ export default function Resume() {
         <div className="certs-cta card">
           <h3>More Certificates</h3>
           <p className="muted">Download the full set of certificates.</p>
-          <a className="btn-outline" href="#" download>
+          <a className="btn-outline"  href={CertificateDownload} download>
             Download Certificates
           </a>
         </div>
       </section>
 
       <footer className="resume-footer muted">
-        Last updated: <time>June 2024</time>
+        Last updated: <time>November 2025</time>
       </footer>
     </main>
   );
