@@ -1,3 +1,5 @@
+import { hover } from "framer-motion";
+
 const skills = [
   { name: "JavaScript (ES6+)", level: 70, color: "#F7D774" },
   { name: "React.js", level: 80, color: "#F7D774" },

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import profileImg from "../../assets/Images/Profile-Images/profile-image.png";
+import { motion } from "framer-motion";
 import './Resume.css';
 import ResumeDownload from "../../assets/Downloads/Resume_Cadingilan/Resume_cadingilan.pdf";
 import certificates from "../../assets/Data/Certificates/Certificate";
@@ -87,10 +88,15 @@ export default function Resume() {
           </div>
 
           <div className="skill-bar-outer">
-            <div
+            <motion.div
               className="skill-bar-inner"
-              style={{ width: `${s.level}%`, backgroundColor: s.color }}
-            ></div>
+              initial={{ width: 0 }}
+              whileInView={{ width: `${s.level}%` }}
+             whileHover={{ scaleY: 1.3, backgroundColor: "#FFD700"   }} // <-- new color on hover (bright gold)           
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              viewport={{ once: true }}
+              style={{ backgroundColor: s.color }}
+              />
           </div>
         </div>
       ))}
