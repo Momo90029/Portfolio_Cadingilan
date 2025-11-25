@@ -69,7 +69,7 @@ const About = () => {
 
           <div className="about-content">
             <div className="small-label">About Me</div>
-            <h1 className="about-title">Omar Cadingilan</h1>
+            <h1 className="about-title">Omar bin Ayob D. Cadingilan</h1>
 
                  {/* ✍️ Typewriter Titles */}
           <div className="typewriter">
@@ -146,11 +146,11 @@ const About = () => {
           <div className="section contributions">
             <h3>Days I Code</h3>
             <div className="contrib-card">
-     <img
-  src="https://github-contribution-summary.vercel.app/api?username=Momo90029"
-  className="gh-graph"
-  alt="GitHub Contribution Summary"
-/>
+              <img
+                        className="gh-graph"
+                        src={`https://github-contributions-api.jogruber.de/v4/Momo90029`}
+                        alt="GitHub contributions"
+              />
 
               <div className="contrib-footer">
                 <span className="muted">Contribution Calendar</span>

@@ -108,22 +108,13 @@
   transform: translate3d(0,0,0);
 }
 .blob-yellow {
-  background: var(--yellow);
+
   width: 380px;
   height: 380px;
   top: -120px;
   right: -120px;
   mix-blend-mode: multiply;
   animation: blob 12s infinite;
-}
-.blob-purple {
-  background: var(--purple);
-  width: 500px;
-  height: 500px;
-  left: -200px;
-  bottom: -160px;
-  mix-blend-mode: multiply;
-  animation: blob 14s infinite reverse;
 }
 .bg-noise {
   position: absolute;
