@@ -13,9 +13,14 @@ footer a:hover {
   transform: scale(1.1);
 }
 
+ footer p {
+    text-align: center;
+    margin-left: 100px;
+  }
+
+
 /* Optional: Limit container width */
 .containerfooter {
-  max-width: 1000vh;
   margin: 0 auto;
   align-items: center;
 }
