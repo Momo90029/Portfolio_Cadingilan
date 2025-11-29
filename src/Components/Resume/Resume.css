@@ -125,6 +125,7 @@ body { background: var(--page-bg); color: #222; font-family: Inter, system-ui, -
 }
 
 
+
 /* Certificates */
 .certs-card .cert-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
 .certs-card .cert-list li { padding:10px; border-radius:10px; background: linear-gradient(180deg, #fff, #fbfbfb); box-shadow: 0 3px 12px rgba(0,0,0,0.04); }

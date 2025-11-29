@@ -17,4 +17,39 @@ footer a:hover {
 .containerfooter {
   max-width: 1000vh;
   margin: 0 auto;
+  align-items: center;
 }
+
+
+/* MOBILE VIEW (≤ 768px) */
+@media (max-width: 768px) {
+
+  /* Hide logo on mobile */
+  .footer-logo {
+    display: none !important;
+  }
+
+  /* Make footer elements stack nicely */
+  footer .containerfooter {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  footer .d-flex {
+    justify-content: center !important; /* center icons on mobile */
+  }
+
+  footer p {
+    text-align: center;
+  }
+
+ footer .social-links {
+  margin-left: 25px !important;
+  justify-content: center !important;
+  gap: 20px !important;
+}
+
+
+}
+
+
