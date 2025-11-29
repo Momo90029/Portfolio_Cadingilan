@@ -1,8 +1,8 @@
-/* ================================
-   🌐 NAVBAR BASE STYLING
-=================================== */
+/* ============================
+   NAVBAR BASE
+============================= */
 .navbar {
-  display: flex;
+ display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
@@ -18,7 +18,7 @@
   border-bottom: none;
 }
 
-/* --- When scrolled --- */
+/* scroll effect */
 .navbar.scrolled {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(15px);
@@ -63,6 +63,7 @@
   width: 100%;
 }
 
+
 /* ================================
    🏠 PAGE-BASED HOVER COLORS
 =================================== */
@@ -86,12 +87,13 @@
   color: #fbd70e;
 }
 
-/* ================================
-   🖋 LOGO STYLING
-=================================== */
+
+/* ============================
+   LOGO
+============================= */
 .logo h2 {
   color: #3a3a3a;
-  margin-left: 65px;
+  margin-left: 10px;
 }
 
 /* Remove blue color, underline, and focus ring on logo link */
@@ -110,4 +112,94 @@
 }
 
 
-/* solve floating dots not rendering */
+
+/* ============================
+   NAV LINKS
+============================= */
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #3a3a3a;
+  position: relative;
+}
+
+/* underline animation */
+.nav-links li a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: #fbd70e;
+  transition: 0.3s ease;
+}
+
+.nav-links li a:hover::after {
+  width: 100%;
+}
+
+/* ============================
+   BURGER BUTTON
+============================= */
+.burger-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #3a3a3a;
+}
+
+/* ============================
+   MOBILE MENU
+============================= */
+.nav-links.mobile {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  flex-direction: column;
+  background: rgba(255,255,255,0.95);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+}
+
+.nav-links.mobile.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ============================
+   RESPONSIVE RULES
+============================= */
+@media (max-width: 900px) {
+  /* show burger button */
+  .burger-btn {
+    display: block;
+  }
+
+  /* hide desktop menu */
+  .nav-links.desktop {
+    display: none;
+  }
+
+  /* enable mobile menu block */
+  .nav-links.mobile {
+    display: flex;
+  }
+}

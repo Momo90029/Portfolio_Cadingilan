@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./About.css";
 import Typewriter from "typewriter-effect";
 import profileImg from "/src/assets/Images/Profile-Images/profile-image.png"; // ✅ correct relative import
+import GithubGraph from "../../assets/Background/GithubGraph/GithubGraph";
 
  const githubUsername = "Momo90029";
 
@@ -143,23 +144,10 @@ const About = () => {
             </div>
           </div>
 
-          <div className="section contributions">
-            <h3>Days I Code</h3>
-            <div className="contrib-card">
-              <img
-                        className="gh-graph"
-                        src={`https://github-contributions-api.jogruber.de/v4/Momo90029`}
-                        alt="GitHub contributions"
-              />
+          <div className="section github">
+            <GithubGraph username={githubUsername} />
+        </div>
 
-              <div className="contrib-footer">
-                <span className="muted">Contribution Calendar</span>
-                <a className="gh-link" href={`https://github.com/Momo90029`} target="_blank" rel="noreferrer">
-                  @{githubUsername} ↗
-                </a>
-              </div>
-            </div>  
-          </div>
         </div>
       </div>
     </section>

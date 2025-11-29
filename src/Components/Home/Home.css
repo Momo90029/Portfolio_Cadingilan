@@ -121,11 +121,13 @@ background: transparent !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
+
+
 /* ✅ Responsive Design */
 @media (max-width: 900px) {
   .profile-mask-container {
     width: 500px;
-    opacity: 0.8;
+    
   }
 
   .home-content {
@@ -175,5 +177,165 @@ background: transparent !important;
   .btn {
     font-size: 0.9rem;
     padding: 10px 20px;
+  }
+}
+
+
+
+/* ------------------------------------------------------------
+   SOCIAL ICONS
+------------------------------------------------------------ */
+.social-links {
+  
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.social-links a {
+  font-size: 1.8rem;
+  color: #1f1b06; /* yellow theme */
+  transition: 0.2s ease;
+}
+
+.social-links a:hover {
+  color: #373737;
+  transform: translateY(-3px);
+}
+
+
+
+/* 📱 Mobile & Tablet Responsiveness */
+@media (max-width: 900px) {
+
+  .home {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    padding-top: 40px;
+  }
+
+  .home-content {
+    margin: 0;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    width: 90vw;
+    text-align: center;
+    align-items: center;
+  }
+
+  .Header h1 {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+
+  .Header p {
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .btn {
+    margin-top: 15px;
+    padding: 12px 24px;
+    font-size: 1rem;
+  }
+
+  .social-links {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .social-links a {
+    font-size: 1.9rem;
+  }
+
+  .profile-mask-container {
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+  }
+
+  .yellow-bg {
+    transform: none;
+  }
+
+  .profile-image {
+    width: 70%;
+    margin: 0 auto;
+  }
+
+.follow-text::after {
+  content: "";
+  display: block;          /* ← required */
+  width: 40%;
+  height: 3px;
+  background-color: #ffd91c;
+  border-radius: 5px;
+  margin: 6px auto 0 auto; /* ← centers the line */
+}
+
+
+}
+
+
+
+/* ------------------------------------------------------------
+   FOLLOW ME ON TEXT
+------------------------------------------------------------ */
+.follow-text {
+  margin-top: 200px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+/* Yellow underline */
+.follow-text::after {
+  content: "";
+  display: block;
+  width: 40%;
+  height: 3px;
+  background-color: #ffd91c;
+  border-radius: 5px;
+}
+
+
+
+/* 📱 Smaller Phones (< 480px) */
+@media (max-width: 480px) {
+
+  .Header h1 {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+
+  .typewriter,
+  .typewriter span {
+    font-size: 1rem;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  .social-links a {
+    font-size: 1.7rem;
+  }
+
+  .profile-image {
+    width: 75%;
   }
 }
