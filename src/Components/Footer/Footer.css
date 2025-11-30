@@ -21,7 +21,6 @@ footer a:hover {
 
 /* Optional: Limit container width */
 .containerfooter {
-  margin: 0 auto;
   align-items: center;
 }
 
@@ -36,8 +35,7 @@ footer a:hover {
 
   /* Make footer elements stack nicely */
   footer .containerfooter {
-    flex-direction: column !important;
-    text-align: center;
+    align-items: center;
   }
 
   footer .d-flex {
@@ -45,11 +43,13 @@ footer a:hover {
   }
 
   footer p {
+    margin-left: 40px !important;
     text-align: center;
+    justify-content: center!important;
   }
 
  footer .social-links {
-  margin-left: 25px !important;
+  margin-left: 40px !important;
   justify-content: center !important;
   gap: 20px !important;
 }
