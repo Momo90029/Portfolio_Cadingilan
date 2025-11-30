@@ -36,6 +36,7 @@ footer a:hover {
   /* Make footer elements stack nicely */
   footer .containerfooter {
     align-items: center;
+    position: relative; /* instead of fixed or absolute */
   }
 
   footer .d-flex {
@@ -43,7 +44,7 @@ footer a:hover {
   }
 
   footer p {
-    margin-left: 40px !important;
+    margin-left: 10px !important;
     text-align: center;
     justify-content: center!important;
   }
