@@ -17,7 +17,7 @@ export default function Resume() {
 
  const [expanded, setExpanded] = useState(false);
 
- const CertificateDownload = "/src/assets/Downloads/Certificates/Certificates_Cadingilan.zip";
+const CertificateDownload = "/Certificates/Certificates_Cadingilan.zip";
 
 
   return (
