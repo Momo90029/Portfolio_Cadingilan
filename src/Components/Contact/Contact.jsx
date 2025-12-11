@@ -1,3 +1,5 @@
+import emailjs from "emailjs-com";
+import OpenAI from "openai";
 import React, { useState } from "react";
 import {
   Send,
@@ -28,33 +30,78 @@ const ContactForm = () => {
   };
 
   const handlePolish = async () => {
-    if (!formData.message || formData.message.length < 5) return;
+  if (!formData.message || formData.message.length < 5) return;
+  
+  setPolishStatus("loading");
 
-    setPolishStatus("loading");
+  try {
+    const client = new OpenAI({
+      apiKey:  import.meta.env.VITE_OPENAI_API_KEY,
+      dangerouslyAllowBrowser: true
+      
+    });
 
-    // simulate AI polish
-    setTimeout(() => {
-      setFormData((prev) => ({
-        ...prev,
-        message: prev.message + " (polished)",
-      }));
+    const response = await client.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "user",
+          content: `Polish this message and turn it into a professional job-availability statement. Message: "${formData.message}"`
+        }
+      ]
+    });
 
-      setPolishStatus("success");
-      setTimeout(() => setPolishStatus("idle"), 2500);
-    }, 1200);
-  };
+    const polished = response.choices[0].message.content;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setStatus("submitting");
+    setFormData((prev) => ({
+      ...prev,
+      message: polished
+    }));
 
-    setTimeout(() => {
-      setStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+    setPolishStatus("success");
+    setTimeout(() => setPolishStatus("idle"), 2500);
 
-      setTimeout(() => setStatus("idle"), 4000);
-    }, 1500);
-  };
+  } catch (err) {
+    console.error(err);
+    setPolishStatus("error");
+  }
+};
+
+
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setStatus("submitting");
+
+  try {
+    const result = await emailjs.send(
+      "service_9mynyxi",     // Your EmailJS service ID
+      "ttemplate_26byk5u",    // Your EmailJS template ID
+      {
+        from_name: formData.name,
+        reply_to: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: "omarcadingilan@gmail.com",
+      },
+      "cxcMyzn6ukIXa6AA9"    // Your EmailJS public key
+    );
+
+    setStatus("success");
+
+    setFormData({
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    });
+
+    setTimeout(() => setStatus("idle"), 3000);
+  } catch (err) {
+    setStatus("error");
+    console.error("Email sending failed:", err);
+  }
+};
+
 
   return (
 
