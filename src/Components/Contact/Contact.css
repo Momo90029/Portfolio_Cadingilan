@@ -238,3 +238,85 @@
   gap: 4px;
   align-items: center;
 }
+/* Checkbox Wrapper */
+.checkbox-field {
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+
+/* Align checkbox + label */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #334155;
+  user-select: none;
+  position: relative;
+}
+
+/* Hide default checkbox */
+.checkbox-container input {
+  opacity: 0;
+  position: absolute;
+  height: 0;
+  width: 0;
+}
+
+/* Custom checkbox box */
+.checkmark {
+  width: 18px;
+  height: 18px;
+  background: #f8fafc;
+  border: 2px solid #e5e7eb;
+  border-radius: 5px;
+  transition: all 0.25s ease;
+  display: inline-block;
+  position: relative;
+
+  /* Animation baseline */
+  transform: scale(1);
+}
+
+/* Hover effect */
+.checkbox-container:hover .checkmark {
+  border-color: #ffd000;
+}
+
+/* Checked glow + scale animation */
+.checkbox-container input:checked + .checkmark {
+  background: #ffd000;
+  border-color: #ffd000;
+  box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
+  transform: scale(1.15);
+}
+
+/* Tick animation */
+.checkbox-container input:checked + .checkmark::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 4px;
+  height: 10px;
+  border: solid #0f172a;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg) scale(0);
+  opacity: 0;
+
+  /* animate checkmark appearing */
+  animation: checkmark-appear 0.28s ease forwards;
+}
+
+/* Keyframe for tick mark pop-in */
+@keyframes checkmark-appear {
+  0% {
+    transform: rotate(45deg) scale(0.2);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(45deg) scale(1);
+    opacity: 1;
+  }
+}
