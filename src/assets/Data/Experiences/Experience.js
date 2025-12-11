@@ -11,15 +11,28 @@ const experience = [
     ],
   },
   {
-    title: "Junior Front-End Developer",
-    company: "Example Company",
-    from: "2020",
-    to: "2022",
+    title: "Product Designer",
+    company: "Overseas Workers Welfare Administration",
+    from: "December 2024",
+    to: "April 2025",
     bullets: [
       "Implemented design-to-code workflows and optimized performance.",
-      "Worked closely with designers to ship iterative product improvements.",
+      "Worked closely with developer to ship iterative product improvements.",
     ],
   },
+
+   {
+    title: "Project Manager",
+    company: "Saint Columban College - Capstone Project ",
+    from: "2023",
+    to: "2024",
+    bullets: [
+      "Able to Develop a System For the Clinic Office with the Team Nitrotech.",
+      "Successfully deployed the System",
+      "Instruct and guide the team and be able to finish the documentation.",
+    ],
+  },
+
 ];
 
 export default experience;
