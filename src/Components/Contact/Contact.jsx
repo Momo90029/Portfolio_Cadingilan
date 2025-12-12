@@ -1,5 +1,4 @@
 import emailjs from "emailjs-com";
-import OpenAI from "openai";
 import React, { useState } from "react";
 import {
   Send,
@@ -19,11 +18,17 @@ const ContactForm = () => {
     email: "",
     subject: "",
     message: "",
-    send_copy: false, // NEW
+    send_copy: false,
   });
 
+  const API_URL =
+  import.meta.env.DEV
+    ? "https://portfolio-cadingilan.vercel.app/api/ai"
+    : "/api/ai";
+
   const [status, setStatus] = useState("idle");
-  const [polishStatus, setPolishStatus] = useState("idle");
+  const [aiMode, setAiMode] = useState("generate");
+  const [aiStatus, setAiStatus] = useState("idle");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,104 +38,150 @@ const ContactForm = () => {
     }));
   };
 
-  const handlePolish = async () => {
-    if (!formData.message || formData.message.length < 5) return;
+  // =======================================================
+  // ✅ UPDATED: CALL AI THROUGH VERCEL BACKEND
+  // =======================================================
+ async function callHfModel(message) {
+  try {
+    const res = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: message }),
+    });
 
-    setPolishStatus("loading");
+    if (!res.ok) throw new Error("AI request failed");
+
+    const data = await res.json();
+
+    // 🟢 CASE 1: HuggingFace returns array [{ generated_text }]
+    if (Array.isArray(data) && data[0]?.generated_text) {
+      return data[0].generated_text.trim();
+    }
+
+    // 🟢 CASE 2: HuggingFace returns { generated_text }
+    if (data.generated_text) {
+      return data.generated_text.trim();
+    }
+
+    console.warn("Unexpected AI response:", data);
+
+    return "AI returned an unexpected format.";
+  } catch (err) {
+    console.error("AI Proxy Error:", err);
+    throw err;
+  }
+}
+
+  // =======================================================
+  // AI GENERATE / POLISH
+  // =======================================================
+  const handleAI = async () => {
+    if (aiMode === "generate" && !formData.subject.trim()) return;
+    if (aiMode === "polish" && formData.message.trim().length < 5) return;
+
+    setAiStatus("loading");
 
     try {
-      const client = new OpenAI({
-        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
-        dangerouslyAllowBrowser: true // Required for browser usage
-      });
+      let prompt = "";
 
-      const response = await client.chat.completions.create({
-        model: "gpt-4o-mini",
-        messages: [
-          {
-            role: "user",
-            content: `Polish this message into a professional job-availability statement: "${formData.message}"`,
-          },
-        ],
-      });
+      if (aiMode === "generate") {
+        prompt = `
+Write a short casual-professional message (3–6 sentences) the user can send to Omar regarding their project.
 
-      const polished = response.choices[0].message.content;
+Subject: "${formData.subject}"
 
-      setFormData((prev) => ({
-        ...prev,
-        message: polished,
-      }));
+Tone: friendly, direct, concise.
+        `;
+      } else {
+        prompt = `
+Polish the following message into a clearer, friendly casual-professional email. Keep meaning the same.
 
-      setPolishStatus("success");
-      setTimeout(() => setPolishStatus("idle"), 2500);
+Message:
+"${formData.message}"
+        `;
+      }
+
+      const output = await callHfModel(prompt);
+
+      setFormData((prev) => ({ ...prev, message: output.trim() }));
+
+      if (aiMode === "generate") setAiMode("polish");
+
+      setAiStatus("success");
+      setTimeout(() => setAiStatus("idle"), 1800);
     } catch (err) {
-      console.error(err);
-      setPolishStatus("error");
+      console.error("AI error:", err);
+      setAiStatus("error");
     }
   };
 
- const handleSubmit = async (e) => {
-  e.preventDefault();
-  setStatus("submitting");
+  // =======================================================
+  // EMAIL SUBMIT (unchanged)
+  // =======================================================
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus("submitting");
 
-  try {
-    const timeString = new Date().toLocaleString("en-PH", {
-      timeZone: "Asia/Manila",
-    });
+    try {
+      const timeString = new Date().toLocaleString("en-PH", {
+        timeZone: "Asia/Manila",
+      });
 
-    // STEP A — Send email to you
-    await emailjs.send(
-      "service_9mynyxi",
-      "template_26byk5u",   // Your template
-      {
-        from_name: formData.name,
-        email: formData.email,
-        project: formData.subject,
-        message: formData.message,
-        time_sent: timeString,
-        to_email: "omarcadingilan@gmail.com",
-      },
-      "cxcMyzn6ukIXa6AA9"
-    );
-
-    // STEP B — Optional: Send copy to the user
-    if (formData.send_copy) {
       await emailjs.send(
         "service_9mynyxi",
-        "template_l2lstw4",  // The user template ID
+        "template_26byk5u",
         {
           from_name: formData.name,
           email: formData.email,
           project: formData.subject,
           message: formData.message,
           time_sent: timeString,
-          to_email: formData.email,   // Only send to user
+          to_email: "omarcadingilan@gmail.com",
         },
         "cxcMyzn6ukIXa6AA9"
       );
+
+      if (formData.send_copy) {
+        await emailjs.send(
+          "service_9mynyxi",
+          "template_l2lstw4",
+          {
+            from_name: formData.name,
+            email: formData.email,
+            project: formData.subject,
+            message: formData.message,
+            time_sent: timeString,
+            to_email: formData.email,
+          },
+          "cxcMyzn6ukIXa6AA9"
+        );
+      }
+
+      setStatus("success");
+
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+        send_copy: false,
+      });
+      setAiMode("generate");
+
+      setTimeout(() => setStatus("idle"), 2500);
+    } catch (err) {
+      console.error("Email sending failed:", err);
+      setStatus("error");
     }
+  };
 
-    setStatus("success");
-
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-      send_copy: false,
-    });
-
-    setTimeout(() => setStatus("idle"), 3000);
-  } catch (err) {
-    setStatus("error");
-    console.error("Email sending failed:", err);
-  }
-};
-
-
+  // =======================================================
+  // RENDER
+  // =======================================================
   return (
     <div className="contact-page-center">
       <div className="contact-wrapper">
+
         {/* LEFT SIDE */}
         <div className="contact-left">
           <div className="circle top"></div>
@@ -144,9 +195,7 @@ const ContactForm = () => {
 
           <div className="info-list">
             <div className="info-item">
-              <div className="icon-box">
-                <Mail className="icon" />
-              </div>
+              <div className="icon-box"><Mail className="icon" /></div>
               <div>
                 <p className="label">Email</p>
                 <p className="value">omarcadingilan@gmail.com</p>
@@ -154,9 +203,7 @@ const ContactForm = () => {
             </div>
 
             <div className="info-item">
-              <div className="icon-box">
-                <Phone className="icon" />
-              </div>
+              <div className="icon-box"><Phone className="icon" /></div>
               <div>
                 <p className="label">Phone Number</p>
                 <p className="value">(+63)9776605126</p>
@@ -164,9 +211,7 @@ const ContactForm = () => {
             </div>
 
             <div className="info-item">
-              <div className="icon-box">
-                <MapPin className="icon" />
-              </div>
+              <div className="icon-box"><MapPin className="icon" /></div>
               <div>
                 <p className="label">Location</p>
                 <p className="value">
@@ -182,6 +227,7 @@ const ContactForm = () => {
           <h2 className="form-title">Send a Message</h2>
 
           <form onSubmit={handleSubmit} className="form">
+
             <div className="row">
               <div className="field">
                 <label>Name</label>
@@ -226,23 +272,25 @@ const ContactForm = () => {
 
                 <button
                   type="button"
-                  className={`polish-btn ${polishStatus}`}
-                  disabled={polishStatus === "loading"}
-                  onClick={handlePolish}
+                  className={`polish-btn ${aiStatus}`}
+                  disabled={aiStatus === "loading"}
+                  onClick={handleAI}
                 >
-                  {polishStatus === "loading" ? (
+                  {aiStatus === "loading" ? (
                     <Loader2 className="spin" size={14} />
-                  ) : polishStatus === "success" ? (
+                  ) : aiStatus === "success" ? (
                     <CheckCircle size={14} />
                   ) : (
                     <Sparkles size={14} />
                   )}
                   <span>
-                    {polishStatus === "loading"
-                      ? "Polishing..."
-                      : polishStatus === "success"
-                      ? "Polished!"
-                      : "AI Polish"}
+                    {aiStatus === "loading"
+                      ? aiMode === "generate"
+                        ? "Generating..."
+                        : "Polishing..."
+                      : aiMode === "generate"
+                      ? "Generate Message"
+                      : "Polish Message"}
                   </span>
                 </button>
               </div>
@@ -253,29 +301,28 @@ const ContactForm = () => {
                 required
                 value={formData.message}
                 onChange={handleChange}
-                placeholder="Write your message here..."
+                placeholder="Write your message or generate one..."
               ></textarea>
 
-              {polishStatus === "error" && (
+              {aiStatus === "error" && (
                 <p className="error-text">
-                  <AlertCircle size={12} /> Failed to polish. Try again.
+                  <AlertCircle size={12} /> AI failed. Try again.
                 </p>
               )}
             </div>
 
-           <div className="checkbox-field">
-           <label className="checkbox-container">
-             <input
-               type="checkbox"
-                name="send_copy"
-                 checked={formData.send_copy}
-                onChange={handleChange}
-            />
-          <span className="checkmark"></span>
-         Send me a copy of this message
-        </label>
-      </div>
-
+            <div className="checkbox-field">
+              <label className="checkbox-container">
+                <input
+                  type="checkbox"
+                  name="send_copy"
+                  checked={formData.send_copy}
+                  onChange={handleChange}
+                />
+                <span className="checkmark"></span>
+                Send me a copy of this message
+              </label>
+            </div>
 
             <button
               type="submit"
