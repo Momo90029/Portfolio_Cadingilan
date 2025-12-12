@@ -1,20 +1,18 @@
 export default async function handler(req, res) {
-  // ----------- CORS FIX -----------
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
   if (req.method === "OPTIONS") {
     return res.status(200).end();
   }
-  // --------------------------------
 
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const response = await fetch(
+    const hfRes = await fetch(
       "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2",
       {
         method: "POST",
@@ -26,11 +24,23 @@ export default async function handler(req, res) {
       }
     );
 
-    const data = await response.json();
-    return res.status(200).json(data);
+    const raw = await hfRes.json();
+
+    // ⭐ Normalize response shape
+    let reply = "No response";
+
+    if (Array.isArray(raw) && raw[0]?.generated_text) {
+      reply = raw[0].generated_text;
+    } else if (raw.generated_text) {
+      reply = raw.generated_text;
+    } else if (raw[0]?.text) {
+      reply = raw[0].text;
+    }
+
+    res.status(200).json({ reply });
 
   } catch (err) {
-    console.error("AI API ERROR:", err);
-    return res.status(500).json({ error: "AI request failed" });
+    console.error(err);
+    res.status(500).json({ error: "AI request failed" });
   }
 }
