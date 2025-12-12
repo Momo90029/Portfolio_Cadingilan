@@ -23,9 +23,8 @@ const ContactForm = () => {
 
   const API_URL =
   import.meta.env.DEV
-    ? "https://portfolio-cadingilan.vercel.app/api/ai"
-    : "/api/ai";
-
+     ? "/api/ai"
+  : "/api/ai";
   const [status, setStatus] = useState("idle");
   const [aiMode, setAiMode] = useState("generate");
   const [aiStatus, setAiStatus] = useState("idle");
@@ -41,7 +40,7 @@ const ContactForm = () => {
   // =======================================================
   // ✅ UPDATED: CALL AI THROUGH VERCEL BACKEND
   // =======================================================
- async function callHfModel(message) {
+async function callHfModel(message) {
   try {
     const res = await fetch(API_URL, {
       method: "POST",
@@ -53,24 +52,19 @@ const ContactForm = () => {
 
     const data = await res.json();
 
-    // 🟢 CASE 1: HuggingFace returns array [{ generated_text }]
-    if (Array.isArray(data) && data[0]?.generated_text) {
-      return data[0].generated_text.trim();
-    }
-
-    // 🟢 CASE 2: HuggingFace returns { generated_text }
-    if (data.generated_text) {
-      return data.generated_text.trim();
+    // 🔥 Correct format from Vercel backend
+    if (data.reply) {
+      return data.reply.trim();
     }
 
     console.warn("Unexpected AI response:", data);
-
     return "AI returned an unexpected format.";
   } catch (err) {
     console.error("AI Proxy Error:", err);
     throw err;
   }
 }
+
 
   // =======================================================
   // AI GENERATE / POLISH
